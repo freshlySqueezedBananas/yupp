@@ -1,0 +1,392 @@
+.pinCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.pinCenterRight {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.pinHorizontal {
+  position: absolute;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.pinBottomCenter {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.pinCenterBottom {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.pinTopCenter {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.margin-auto {
+  margin: 0 auto;
+}
+.text-align-left,
+.align-left {
+  text-align: left !important;
+}
+.text-align-right,
+.align-right {
+  text-align: right !important;
+}
+.text-align-center,
+.align-center {
+  text-align: center !important;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.no-pointer {
+  cursor: default;
+}
+.no-events {
+  pointer-events: none;
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
+  /* No support for these yet, use at own risk */
+  -o-user-select: none;
+  user-select: none;
+}
+.no-cursor {
+  cursor: none;
+}
+.push-top--5 {
+  margin-top: 5px;
+}
+.push-top--10 {
+  margin-top: 10px;
+}
+.push-top--15 {
+  margin-top: 15px;
+}
+.push-top--20 {
+  margin-top: 20px;
+}
+.push-top--25 {
+  margin-top: 25px;
+}
+.push-top--30 {
+  margin-top: 30px;
+}
+.push-top--35 {
+  margin-top: 35px;
+}
+.push-top--40 {
+  margin-top: 40px !important;
+}
+.push-bottom--1em {
+  margin-bottom: 1em !important;
+}
+.push-bottom--2em {
+  margin-bottom: 2em !important;
+}
+.push-bottom--3em {
+  margin-bottom: 3em !important;
+}
+.display--inline-block {
+  display: inline-block;
+}
+.display--block {
+  display: block;
+}
+.max-width--45 {
+  max-width: 45%;
+}
+.max-width--50 {
+  max-width: 50%;
+}
+.max-width--60 {
+  max-width: 60%;
+}
+.max-width--80 {
+  max-width: 80%;
+}
+.max-width--100 {
+  max-width: 100% !important;
+}
+.max-height--80 {
+  max-height: 80%;
+  width: auto;
+}
+.max-height--100 {
+  max-height: 100%;
+  width: auto;
+}
+.pointer-events--all {
+  pointer-events: all;
+}
+.pointer-events--none {
+  pointer-events: none;
+}
+.overflow--hidden {
+  overflow: hidden;
+}
+.padding--10 {
+  padding: 10px;
+}
+.padding--20 {
+  padding: 20px;
+}
+.padding--30 {
+  padding: 30px;
+}
+.padding-left--10 {
+  padding-left: 10px;
+}
+.padding-top--50 {
+  padding-top: 50px;
+}
+.padding-bottom--50 {
+  padding-bottom: 50px;
+}
+body,
+html {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: 16px;
+  font-family: 'Open Sans';
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
+  /* No support for these yet, use at own risk */
+  -o-user-select: none;
+  user-select: none;
+}
+.vignette {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+.brand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  max-width: 65%;
+}
+p.cona {
+  margin: 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  bottom: 20px;
+  color: #fff;
+  font-size: 10em;
+  font-family: arial, 'sans-serif';
+  font-weight: bold;
+  display: none;
+}
+main {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ffc60c;
+}
+main .title {
+  color: #fff;
+  text-align: center;
+  font-size: 6em;
+}
+.hexagon {
+  position: relative;
+  width: 300px;
+  height: 173.21px;
+  background-color: #ffe35d;
+  margin: 86.60px auto;
+}
+.hexagon span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 1.75em;
+}
+p {
+  padding-top: 3em;
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+.hexagon {
+  position: relative;
+  width: 150px;
+  height: 86.60px;
+  background-color: #ffe35d;
+  margin: 43.30px auto;
+}
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 75px solid transparent;
+  border-right: 75px solid transparent;
+}
+.hexagon:before {
+  bottom: 100%;
+  border-bottom: 43.30px solid #ffe35d;
+}
+.hexagon:after {
+  top: 100%;
+  width: 0;
+  border-top: 43.30px solid #ffe35d;
+}
+.wait-conn {
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: rgba(29, 29, 27, 0.75);
+  text-align: center;
+  padding: 50px 25px;
+  color: #ffffff;
+  display: none;
+}
+.red {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  display: none;
+}
+.red img {
+  max-width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background: white;
+  z-index: 9999;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  animation: ripple-animation 750ms;
+}
+.ripple.in {
+  mix-blend-mode: exclusion;
+}
+@keyframes ripple-animation {
+  from {
+    transform: scale(0.25);
+    opacity: 1;
+  }
+  to {
+    transform: scale(100);
+    opacity: 0;
+  }
+}
+.toggle-fullscreen {
+  position: absolute;
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -ms-transform-origin: center center;
+  -webkit-transform-origin: center center;
+  -moz-transform-origin: center center;
+  -o-transform-origin: center center;
+  transform-origin: center center;
+  bottom: 10px;
+  left: 50%;
+  z-index: 9999;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+}
+.toggle-fullscreen:active {
+  -ms-transform: translateX(-50%) scale(0.6);
+  -webkit-transform: translateX(-50%) scale(0.6);
+  -moz-transform: translateX(-50%) scale(0.6);
+  transform: translateX(-50%) scale(0.6);
+  bottom: 5px;
+}
+.wait {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #8c92ac;
+  color: #fff;
+  z-index: 9999;
+  display: none;
+}
+.wait p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 80%;
+  text-align: center;
+}

@@ -1,0 +1,181 @@
+@import "variables";
+@import "mixins";
+
+body, html {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	font-size: 16px;
+	font-family: 'Open Sans';
+	.userSelect(none);
+}
+
+.vignette {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	//.boxShadow(inset 0 0 10em @color-black);
+	//background: #a90a0a;
+	background: #fff;
+}
+
+.brand {
+	.pinCenter;
+	max-width: 65%;
+}
+
+p.cona {
+	margin: 0;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	bottom: 20px;
+	color: #fff;
+	font-size: 10em;
+	font-family: arial, 'sans-serif';
+	font-weight: bold;
+	display: none;
+}
+
+main {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #ffc60c;
+
+	.title {
+		color: #fff;
+		text-align: center;
+		font-size: 6em;
+	}
+}
+
+.hexagon {
+  position: relative;
+  width: 300px;
+  height: 173.21px;
+  background-color: #ffe35d;
+  margin: 86.60px auto;
+
+  span {
+  	.pinCenter;
+  	font-size: 1.75em;
+  }
+}
+
+p {
+	padding-top: 3em;
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.hexagon {
+  position: relative;
+  width: 150px;
+  height: 86.60px;
+  background-color: #ffe35d;
+  margin: 43.30px auto;
+}
+
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 75px solid transparent;
+  border-right: 75px solid transparent;
+}
+
+.hexagon:before {
+  bottom: 100%;
+  border-bottom: 43.30px solid #ffe35d;
+}
+
+.hexagon:after {
+  top: 100%;
+  width: 0;
+  border-top: 43.30px solid #ffe35d;
+}
+
+.wait-conn {
+	.borderRadius(25px);
+	.pinCenter;
+	background-color: fade(@color-black, 75%);
+	text-align: center;
+	padding: 50px 25px;
+	color: @color-white;
+	display: none;
+}
+
+.red {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: red;
+	display: none;
+
+	img {
+		max-width: 100%;
+		.pinCenter;
+	}
+}
+
+.ripple {
+	position: absolute;
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	background: white;
+	z-index: 9999;
+	&.in {
+	    mix-blend-mode: exclusion;
+	}
+	    .transform(translate(-50%,-50%));
+
+
+  animation: ripple-animation 750ms;
+}
+
+@keyframes ripple-animation {
+    from {
+      transform: scale(0.25);
+      opacity: 1;
+    }
+    to {
+      transform: scale(100);
+      opacity: 0;
+    }
+}
+
+.toggle-fullscreen {
+	position: absolute;
+	.transform(translateX(-50%));
+	.transformOrigin(center center);
+	bottom: 10px;
+	left: 50%;
+	z-index: 9999;
+   	.opacity(0.5);
+	&:active {
+		.transform(translateX(-50%) scale(0.6));
+		bottom: 5px;
+	}
+}
+.wait {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #8c92ac;
+	color: #fff;
+	z-index: 9999;
+	display: none;
+
+	p {
+		.pinCenter;
+		width: 80%;
+		text-align: center;
+	}
+}
