@@ -260,18 +260,6 @@ html {
   transform: translate(-50%, -50%);
   max-width: 65%;
 }
-p.cona {
-  margin: 0;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  bottom: 20px;
-  color: #fff;
-  font-size: 10em;
-  font-family: arial, 'sans-serif';
-  font-weight: bold;
-  display: none;
-}
 main {
   position: absolute;
   width: 100%;
@@ -282,52 +270,11 @@ main .title {
   text-align: center;
   font-size: 6em;
 }
-.hexagon {
-  position: relative;
-  width: 300px;
-  height: 173.21px;
-  background-color: #ffe35d;
-  margin: 86.60px auto;
-}
-.hexagon span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  font-size: 1.75em;
-}
 p {
   padding-top: 3em;
   width: 80%;
   margin: 0 auto;
   text-align: center;
-}
-.hexagon {
-  position: relative;
-  width: 150px;
-  height: 86.60px;
-  background-color: #ffe35d;
-  margin: 43.30px auto;
-}
-.hexagon:before,
-.hexagon:after {
-  content: "";
-  position: absolute;
-  width: 0;
-  border-left: 75px solid transparent;
-  border-right: 75px solid transparent;
-}
-.hexagon:before {
-  bottom: 100%;
-  border-bottom: 43.30px solid #ffe35d;
-}
-.hexagon:after {
-  top: 100%;
-  width: 0;
-  border-top: 43.30px solid #ffe35d;
 }
 .wait-conn {
   -webkit-border-radius: 25px;
@@ -365,6 +312,16 @@ section.red img {
   -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+section.red .buttons {
+  position: absolute;
+  width: 100%;
+  bottom: 2.5em;
+  text-align: center;
+}
+section.red .buttons .button {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
 .ripple {
   position: absolute;
   border-radius: 50%;
@@ -372,10 +329,10 @@ section.red img {
   height: 100px;
   background: white;
   z-index: 9999;
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  -ms-transform: translate(100%, -50%);
+  -webkit-transform: translate(100%, -50%);
+  -moz-transform: translate(100%, -50%);
+  transform: translate(100%, -50%);
   -ms-transform-origin: center center;
   -webkit-transform-origin: center center;
   -moz-transform-origin: center center;
@@ -443,21 +400,21 @@ section.red img {
 }
 @keyframes pulse-animation {
   from {
-    transform: scale(0.25);
+    transform: translate(-50%, -50%) scale(0.25);
     opacity: 1;
   }
   to {
-    transform: scale(100);
+    transform: translate(-50%, -50%) scale(100);
     opacity: 0;
   }
 }
 @keyframes ripple-animation {
   from {
-    transform: scale(0.25);
+    transform: translate(-50%, -50%) scale(0.25);
     opacity: 0.6;
   }
   to {
-    transform: scale(15);
+    transform: translate(-50%, -50%) scale(15);
     opacity: 0;
   }
 }

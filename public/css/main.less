@@ -57,19 +57,6 @@ body, html {
 	max-width: 65%;
 }
 
-p.cona {
-	margin: 0;
-	position: absolute;
-	text-align: center;
-	width: 100%;
-	bottom: 20px;
-	color: #fff;
-	font-size: 10em;
-	font-family: arial, 'sans-serif';
-	font-weight: bold;
-	display: none;
-}
-
 main {
 	position: absolute;
 	width: 100%;
@@ -82,52 +69,11 @@ main {
 	}
 }
 
-.hexagon {
-  position: relative;
-  width: 300px;
-  height: 173.21px;
-  background-color: #ffe35d;
-  margin: 86.60px auto;
-
-  span {
-  	.pinCenter;
-  	font-size: 1.75em;
-  }
-}
-
 p {
 	padding-top: 3em;
 	width: 80%;
 	margin: 0 auto;
 	text-align: center;
-}
-
-.hexagon {
-  position: relative;
-  width: 150px;
-  height: 86.60px;
-  background-color: #ffe35d;
-  margin: 43.30px auto;
-}
-
-.hexagon:before,
-.hexagon:after {
-  content: "";
-  position: absolute;
-  width: 0;
-  border-left: 75px solid transparent;
-  border-right: 75px solid transparent;
-}
-
-.hexagon:before {
-  bottom: 100%;
-  border-bottom: 43.30px solid #ffe35d;
-}
-
-.hexagon:after {
-  top: 100%;
-  width: 0;
-  border-top: 43.30px solid #ffe35d;
 }
 
 .wait-conn {
@@ -150,6 +96,18 @@ section.red {
 		max-width: 100%;
 		.pinCenter;
 	}
+
+	.buttons {
+		position: absolute;
+		width: 100%;
+		bottom: 2.5em;
+		text-align: center;
+
+		.button {
+		  background: rgba(255, 255, 255, 0.2);
+		  color: #fff;
+		}
+	}
 }
 
 .ripple {
@@ -163,7 +121,7 @@ section.red {
 	    -webkit-mix-blend-mode: exclusion;
 	    mix-blend-mode: exclusion;
 	}
-	.transform(translate(-50%,-50%));
+	.transform(translate(100%,-50%));
 	.transformOrigin(center center);
 
 
@@ -216,22 +174,22 @@ section.red {
 
 @keyframes pulse-animation {
     from {
-      transform: scale(0.25);
+      transform: translate(-50%, -50%) scale(0.25);
       opacity: 1;
     }
     to {
-      transform: scale(100);
+      transform: translate(-50%, -50%) scale(100);
       opacity: 0;
     }
 }
 
 @keyframes ripple-animation {
     from {
-      transform: scale(0.25);
+      transform: translate(-50%, -50%) scale(0.25);
       opacity: 0.6;
     }
     to {
-      transform: scale(15);
+      transform: translate(-50%, -50%) scale(15);
       opacity: 0;
     }
 }

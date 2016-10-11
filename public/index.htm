@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="css/main.css">
 	</head>
 	<body>
-		<img src="img/fullscreen-symbol.png" class="toggle-fullscreen">
+		<img src="img/fullscreen-symbol.png" class="toggle-fullscreen" style="display: none">
 		<main>
 			<div class="wrapper">
 				<div class="yupp">
@@ -16,8 +16,8 @@
 			</div>
 		</main>
 		<section class="share">
-			<button class="button" onClick="window.location.reload()" style="display: none"><strong>Yupp</strong> yourself</button><br>
-			<button class="button" onClick="window.location.reload()">Share <strong>yupp</strong></button>
+			<button class="button" style="display: none"><strong>Yupp</strong> yourself</button><br>
+			<a class="button" data-action="whatsapp">Share <strong>yupp</strong></a>
 		</section>
 		<section class="wait">
 			<div class="wrapper">
@@ -26,8 +26,10 @@
 		</section>
 		<section class="red">
 			<img class="logo">
+			<div class="buttons">
+				<button class="button" onClick="window.location.reload()">I found <strong>you</strong></button>
+			</div>
 		</section>
-		<!--<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>-->
 		<script src="bower_components/socket.io-client/socket.io.js"></script>
 		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 		<script src="gsap/src/minified/TweenMax.min.js"></script>
@@ -35,8 +37,12 @@
 		<script src="bower_components/store-js/store.min.js"></script>
 		<script src="bower_components/fingerprintjs2/dist/fingerprint2.min.js"></script>
 		<script src="bower_components/underscore/underscore-min.js"></script>
+		<script src="bower_components/fastclick/lib/fastclick.min.js"></script>
 		<script src="js/main.js"></script>
 		<script>
+			$(function() {
+			    FastClick.attach(document.body);
+			});
 			var channel = location.href.substr(location.href.lastIndexOf('/')+1);
 			var storage = store.get('yupp');
 
@@ -85,7 +91,7 @@
 			socket.on('yupp pause', function() {
 				$('section.red').fadeOut();
 				$('.share').hide();
-				$('.wait > .wrapper').html('<p>Your <strong>yupp</strong> is opened elsewhere.</p><button class="button" onClick="window.location.reload()">Use <strong>here</button>').parent().fadeIn();
+				$('.wait > .wrapper').html('<p>Your <strong>yupp</strong> is open elsewhere.</p><button class="button" onClick="window.location.reload()">Use <strong>here</button>').parent().fadeIn();
 				$('main').fadeIn();
 			});
 
