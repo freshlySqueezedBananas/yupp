@@ -11,36 +11,6 @@ body, html {
 	font-size: 16px;
 	font-family: 'Open Sans';
 	.userSelect(none);
-	background-color: #1d1d1d;
-}
-
-.wrapper {
-	.yupp {
-		width: 65%;
-		display: inline;
-		.pinCenter;
-		overflow: hidden;
-		img {
-		.pinCenter;
-			max-width: 100%;
-			height: auto;
-			z-index: 9999;
-			padding: -1px;
-		}
-
-		.ripples {
-			width: 98%;
-			height: 98%;
-			.pinCenter;
-		}
-
-	}
-}
-
-.share {
-	.pinCenter;
-	text-align: center;
-	display: none;
 }
 
 .vignette {
@@ -74,6 +44,7 @@ main {
 	position: absolute;
 	width: 100%;
 	height: 100%;
+	background: #ffc60c;
 
 	.title {
 		color: #fff;
@@ -140,10 +111,11 @@ p {
 	display: none;
 }
 
-section.red {
+.red {
 	position: absolute;
 	width: 100%;
 	height: 100%;
+	background-color: red;
 	display: none;
 
 	img {
@@ -160,78 +132,21 @@ section.red {
 	background: white;
 	z-index: 9999;
 	&.in {
-	    -webkit-mix-blend-mode: exclusion;
 	    mix-blend-mode: exclusion;
 	}
-	.transform(translate(-50%,-50%));
-	.transformOrigin(center center);
+	    .transform(translate(-50%,-50%));
 
 
-  animation: pulse-animation 750ms;
+  animation: ripple-animation 750ms;
 }
 
-.ripples {
-	position: absolute;
-	width: 90%;
-	height: 90%;
-	.pinCenter;
-	z-index: 9800;
-	overflow: hidden;
-}
-
-.ripple2 {
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	.transform(translateX(-50%));
-	.transformOrigin(center bottom);
-	border-radius: 50%;
-	width: 100px;
-	height: 100px;
-	z-index: 9800;
-
-	&.red {
-		background: #fe0000;
-	}
-
-	&.yellow {
-		background: #f0ff00;
-	}
-	&.green {
-		background: #09ff00
-	}
-	&.blue {
-		background: #011efe
-	}
-	&.purple {
-		background: #ff00db
-	}
-	&.cyan {
-		background: #00ecff
-	}
-
-	animation: ripple-animation 1500ms;
-	.transition(all 600ms cubic-bezier(0.77, 0, 0.175, 1));
-}
-
-@keyframes pulse-animation {
+@keyframes ripple-animation {
     from {
       transform: scale(0.25);
       opacity: 1;
     }
     to {
       transform: scale(100);
-      opacity: 0;
-    }
-}
-
-@keyframes ripple-animation {
-    from {
-      transform: scale(0.25);
-      opacity: 0.6;
-    }
-    to {
-      transform: scale(15);
       opacity: 0;
     }
 }
@@ -253,37 +168,14 @@ section.red {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background: rgba(140,146,172,0.5);
-    -webkit-mix-blend-mode: color-dodge;
-    mix-blend-mode: color-dodge;
+	background: #8c92ac;
 	color: #fff;
 	z-index: 9999;
 	display: none;
 
-	.wrapper {
+	p {
 		.pinCenter;
 		width: 80%;
 		text-align: center;
-	}
-}
-
-.button {
-    display: inline-block;
-	background: #fff;
-	padding: 15px 25px;
-	margin: 2em 0;
-	text-decoration: none;
-	color: #1d1d1d;
-	text-transform: uppercase;
-	border: 0;
-
-	.borderRadius(2px);
-
-	&:active, &:focus {
-		outline: none;
-	}
-
-	&:active {
-		.transform(scale(0.9));
 	}
 }

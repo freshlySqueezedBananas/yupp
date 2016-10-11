@@ -1,12 +1,13 @@
 var express = require('express');
 var app = require('express')();
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var _ = require('underscore');
 
-function randomString() {
-	return Math.random().toString(36).substr(2, 5);
-}
+
+var io = require('socket.io')(http);
+
+
+var _ = require('underscore');
+var randomString = require("randomstring");
 
 var Color = {
 	palette: {
@@ -15,6 +16,12 @@ var Color = {
 			active: false,
 			hex: "#fe0000",
 			image: 'superb.png'
+		},
+		orange: {
+			name: 'orange',
+			active: false,
+			hex: "#ff8300",
+			image: 'mega.png'
 		},
 		yellow: {
 			name: 'yellow',
@@ -49,7 +56,7 @@ var Color = {
 	},
 	pick: function() {
 		var available = _.where(Color.palette, {active: false});
-		var pick = undefined;
+		var pick;
 
 		if (available.length > 0) {
 			pick = _.shuffle(available)[0];
@@ -59,7 +66,7 @@ var Color = {
 
 		return pick;
 	}
-};
+}
 
 var Room = {
 	join: function(socket, room) {
@@ -70,9 +77,15 @@ var Room = {
 		socket.join(socket.id);
 		// Variável globalizada no socket para referência no evento de disconnect
 		socket.room = room;
+
+		console.log();
+	},
+	leave: function(socket, room) {
+		socket.leave(room);
+		console.log(socket.id+' left room '+room);
 	},
 	connections: function(room) {
-		// Retorna 0 se a sala existir e o número de ligações à sala se existir
+		// Retorna 0 se a sala não existir e o número de ligações à sala se existir
 		return _.isUndefined(io.sockets.adapter.rooms[room]) ? 0:io.sockets.adapter.rooms[room].length;
 	},
 	exists: function(room) {
@@ -100,11 +113,14 @@ var Room = {
 			// Se tiver apenas uma ligação verifica se o canal existe e se o yupp está activo
 			if (!_.isUndefined(io.sockets.adapter.rooms[room]) && !_.isUndefined(io.sockets.adapter.rooms[room].status)) {
 				io.sockets.adapter.rooms[room].status = undefined;
-				Color.palette[io.sockets.adapter.rooms[room].color.name].active = false;
+				var colorName = io.sockets.adapter.rooms[room].color.name;
+				Color.palette[colorName].active = false;
 				io.to(room).emit('yupp halt');
 			}
 		}
-	}
+	},
+	rooms: []
+
 }
 
 app.use(express.static('public'));
@@ -116,7 +132,11 @@ app.get('/:room', function(req, res){
   res.sendFile('public/index.htm', { root: __dirname });
 });
 
-io.on('connection', function(socket){
+var Users = {}
+
+io.on('connection', function(socket) {
+	console.log('[connection] socket id: '+socket.id);
+
 	// Emissão de evento de boas-vindas ao socket que se ligou ao servidor
 	io.to(socket.id).emit('welcome');
 
@@ -125,10 +145,14 @@ io.on('connection', function(socket){
 		Room.check(socket, room);
 	});
 
+	socket.on('leave room', function(room) {
+		Room.leave(socket, room);
+	});
+
 	socket.on('create room', function(){
-		var roomName = randomString();
+		var roomName = randomString.generate({length: 6, readable: true, charset: 'alphanumeric'});
 		while(!_.isUndefined(io.sockets.adapter.rooms[roomName])) {
-			roomName = randomString();
+			roomName = randomString.generate({length: 6, readable: true, charset: 'alphanumeric'});
 		}
 
 		Room.join(socket, roomName);
@@ -141,14 +165,62 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('disconnect', function () {
-		console.log('disconnected');
+		console.log('[disconnection] socket id: '+socket.id);
+
 
 		if (Room.connections(socket.room) < 2) {
 			Room.check(socket, socket.room);
 		}
+
+		console.log('\n_____ Users _____ [disconnect:1 start]');
+		console.log(Users);
+		console.log('_____ Users _____ [disconnect:1 end]\n');
+
+		console.log('[echo: disconnect] socket fingerprint: '+socket.fingerprint);
+		console.log('[echo: disconnect] socket object: ');
+		console.log(Users[socket.fingerprint].sockets);
+
+		var index = _.indexOf(Users[socket.fingerprint].sockets, socket.id);
+		console.log('[echo: disconnect] socket index: '+index);
+		Users[socket.fingerprint].sockets.splice(index, 1);
+
+		/*if (Users[socket.fingerprint].sockets.length === 0) {
+			delete Users[socket.fingerprint];
+		}*/
+
+		console.log('\n_____ Users _____ [disconnect:2 start]');
+		console.log(Users);
+		console.log('_____ Users _____ [disconnect:2 end]\n');
+    });
+
+    socket.on('handshake', function(fingerprint)  {
+		// Variável globalizada no socket para referência no evento de disconnect
+		socket.fingerprint = fingerprint;
+    	//Se ainda não existir uma ligação com a mesma fingerprint
+    	if (_.isUndefined(Users[fingerprint])) {
+    		Users[fingerprint] = {
+    			sockets: []
+    		}
+    	}
+    	else {
+    		_.each(Users[fingerprint].sockets, function(id) {
+    			io.to(id).emit('yupp pause');
+				io.sockets.sockets[id].disconnect();
+    		});
+    	}
+
+    	//Adiciona o id do socket ao array para fazer tracking
+		Users[fingerprint].sockets.push(socket.id);
+
+		console.log('[handshake] socket id: '+socket.id);
+
+		console.log('\n_____ Users _____ [handshake start]');
+		console.log(Users);
+		console.log('_____ Users _____ [handshake end]\n');
+
     });
 });
 
 http.listen(3000, function(){
-  console.log('up & running on *:3000');
+  console.log('[server] up & running on *:3000');
 });

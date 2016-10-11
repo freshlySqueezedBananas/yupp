@@ -8,76 +8,132 @@
 	<body>
 		<img src="img/fullscreen-symbol.png" class="toggle-fullscreen">
 		<main>
-			<div class="interface">
-				<h1 class="title">Yupp</h1>
-				 <!--<a href="javascript:window.location='whatsapp://send?text='+encodeURIComponent(location.href);" data-action="whatsapp">-->
-				<a data-action="whatsapp">
-					<div class="hexagon"><span>SHARE</span></div>
-				</a>
-				<p>Pump up your phone's brightness</p>
-				<div class="wait-conn">Waiting for a connection</div>
-			 </div>
+			<div class="wrapper">
+				<div class="yupp">
+					<img src="img/yupp.png">
+					<div class="ripples"></div>
+				</div>
+			</div>
 		</main>
+		<section class="share">
+			<button class="button" onClick="window.location.reload()" style="display: none"><strong>Yupp</strong> yourself</button><br>
+			<button class="button" onClick="window.location.reload()">Share <strong>yupp</strong></button>
+		</section>
 		<section class="wait">
-			<p>Waiting for your friend</p>
+			<div class="wrapper">
+				<p>Waiting for your friend</p>
+			</div>
 		</section>
 		<section class="red">
 			<img class="logo">
 		</section>
-		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<!--<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>-->
+		<script src="bower_components/socket.io-client/socket.io.js"></script>
 		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-		<script src="js/jquery.mobile.events.min.js"></script>
-		<script src="js/main.js"></script>
 		<script src="gsap/src/minified/TweenMax.min.js"></script>
+		<script src="js/jquery.mobile.events.min.js"></script>
+		<script src="bower_components/store-js/store.min.js"></script>
+		<script src="bower_components/fingerprintjs2/dist/fingerprint2.min.js"></script>
+		<script src="bower_components/underscore/underscore-min.js"></script>
+		<script src="js/main.js"></script>
 		<script>
 			var channel = location.href.substr(location.href.lastIndexOf('/')+1);
+			var storage = store.get('yupp');
+
+			if (_.isUndefined(storage)) {
+				storage = {};
+
+				new Fingerprint2().get(function(result) {
+					storage.fingerprint = result;
+					store.set('yupp', storage);
+				});
+
+			}
 			var socket = io();
 
-			socket.on('welcome', function(){
+
+			socket.on('welcome', function(data){
+				socket.emit('handshake', storage.fingerprint);
+
 				if (channel) {
 					socket.emit('join room', channel);
 					$("[data-action='whatsapp']").attr('href', 'whatsapp://send?text='+encodeURIComponent(location.href));
+					$('.wait > .wrapper').html('<p>Waiting for someone to join your <strong>yupp</strong></p><button class="button" onClick="window.location.reload()">Share <strong>yupp</button>').parent().fadeIn();
 				}
 				else {
 					socket.emit('create room');
+					$('.share').fadeIn();
 				}
+
 			});
 
 			socket.on('room created', function(room) {
-				$("[data-action='whatsapp']").attr('href', 'whatsapp://send?text='+encodeURIComponent(location.href+'/'+room.name));
+				channel = room.name;
+				$("[data-action='whatsapp']").attr('href', 'whatsapp://send?text='+encodeURIComponent(location.href+room.name));
 			});
 
 			socket.on('yupp live', function(color) {
-				console.log(color);
-				$('.wait').fadeOut();
-				$('.red').css('backgroundColor', color.hex).fadeIn();
-				$('.red img').attr('src', '/img/'+color.image);
+				$('.wait, main, .share').fadeOut();
+				$('section.red img').attr('src', '/img/'+color.image);
+				$('section.red').css('backgroundColor', color.hex).fadeIn();
 			});
 			socket.on('yupp halt', function() {
-				$('.red').fadeOut();
-				$('.wait').fadeIn();
+				$('section.red').fadeOut();
+				$('.wait > .wrapper').html('<p>Waiting for someone to join your <strong>yupp</strong></p><button class="button" onClick="window.location.reload()">Share <strong>yupp</button>').parent().fadeIn();
+				$('main').fadeIn();
+			});
+			socket.on('yupp pause', function() {
+				$('section.red').fadeOut();
+				$('.share').hide();
+				$('.wait > .wrapper').html('<p>Your <strong>yupp</strong> is opened elsewhere.</p><button class="button" onClick="window.location.reload()">Use <strong>here</button>').parent().fadeIn();
+				$('main').fadeIn();
 			});
 
 
+			var pulsable = true;
+
 			$('.red').tap(function(event) {
+					 var $div = $('<div/>'),
+						xPos = event.pageX,
+						yPos = event.pageY,
+						yPosPercentage = event.pageY/$(document).height(),
+						xPosPercentage = event.pageX/$(document).width();
 
-				 var $div = $('<div/>'),
-					xPos = event.pageX,
-					yPos = event.pageY,
-					yPosPercentage = event.pageY/$(document).height(),
-					xPosPercentage = event.pageX/$(document).width();
 
+					if (pulsable) {
+						pulsable = false;
+						socket.emit('pulse out', {top: yPosPercentage.toFixed(2), left: xPosPercentage.toFixed(2)});
 
-					socket.emit('pulse out', {top: yPosPercentage.toFixed(2), left: xPosPercentage.toFixed(2)});
+						window.setTimeout(function() {
+							pulsable = true;
+						}, 200);
+					}
 
 
 					$div.addClass('ripple out').css({top: yPos, left: xPos});
 
+					window.setTimeout(function(){
+						$div.remove();
+					}, 740);
+					$('.red').append($div);
+			});
+
+			$('.yupp').css({width: $('.yupp').width(), height: $('.yupp').width()});
+
+			var colors = ['red', 'yellow', 'green', 'cyan', 'blue', 'purple'];
+
+			setInterval(function() {
+				var $div = $('<div/>');
+
+				$div.addClass('ripple2 in '+colors[0]);
+				colors.push(colors.shift());
+
 				window.setTimeout(function(){
 					$div.remove();
-				}, 740);
-				$('.red').append( $div)
-			});
+				}, 1490);
+
+				$('.yupp .ripples').append($div);
+			}, 1500);
 
 			socket.on('pulse in', function(position) {
 				/*TweenMax.fromTo($('.logo'), 0.3, {scaleX: 1, scaleY: 1}, {scaleX:1.2, scaleY:1.3, ease:Elastic.easeOut, repeat: 3, yoyo: true, delay: 0, repeatDelay:0})*/

@@ -1,9 +1,11 @@
 {
-  "name": "socket-chat-example",
+  "name": "yupp",
   "version": "0.0.1",
   "description": "yupp",
   "dependencies": {
     "express": "^4.10.2",
-    "socket.io": "^1.4.8"
+    "randomstring": "^1.1.5",
+    "socket.io": "^1.4.8",
+    "socket.io.users": "^2.0.2"
   }
 }

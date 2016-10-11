@@ -197,9 +197,7 @@ html {
   user-select: none;
   background-color: #1d1d1d;
 }
-.wrapper .yupp {
-  width: 65%;
-  display: inline;
+.interface .yupp {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -209,20 +207,13 @@ html {
   transform: translate(-50%, -50%);
   overflow: hidden;
 }
-.wrapper .yupp img {
+.interface .yupp img {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
   max-width: 100%;
-  height: auto;
   z-index: 9999;
   padding: -1px;
 }
-.wrapper .yupp .ripples {
+.interface .yupp .ripples {
   width: 98%;
   height: 98%;
   position: absolute;
@@ -232,17 +223,6 @@ html {
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-}
-.share {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  text-align: center;
-  display: none;
 }
 .vignette {
   position: absolute;
@@ -349,13 +329,14 @@ p {
   color: #ffffff;
   display: none;
 }
-section.red {
+main.red {
   position: absolute;
   width: 100%;
   height: 100%;
+  background-color: red;
   display: none;
 }
-section.red img {
+main.red img {
   max-width: 100%;
   position: absolute;
   top: 50%;
@@ -376,52 +357,19 @@ section.red img {
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  -ms-transform-origin: center center;
-  -webkit-transform-origin: center center;
-  -moz-transform-origin: center center;
-  -o-transform-origin: center center;
-  transform-origin: center center;
-  animation: pulse-animation 750ms;
+  animation: ripple-animation 750ms;
 }
 .ripple.in {
-  -webkit-mix-blend-mode: exclusion;
   mix-blend-mode: exclusion;
-}
-.ripples {
-  width: 90%;
-  height: 90%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  z-index: 9800;
-  overflow: hidden;
 }
 .ripple2 {
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  -ms-transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  transform: translateX(-50%);
-  -ms-transform-origin: center bottom;
-  -webkit-transform-origin: center bottom;
-  -moz-transform-origin: center bottom;
-  -o-transform-origin: center bottom;
-  transform-origin: center bottom;
   border-radius: 50%;
   width: 100px;
   height: 100px;
   z-index: 9800;
-  animation: ripple-animation 1500ms;
-  -webkit-transition: all 600ms cubic-bezier(0.77, 0, 0.175, 1);
-  -moz-transition: all 600ms cubic-bezier(0.77, 0, 0.175, 1);
-  -o-transition: all 600ms cubic-bezier(0.77, 0, 0.175, 1);
-  transition: all 600ms cubic-bezier(0.77, 0, 0.175, 1);
+  mix-blend-mode: exclusion;
+  animation: ripple-animation 750ms;
 }
 .ripple2.red {
   background: #fe0000;
@@ -441,23 +389,13 @@ section.red img {
 .ripple2.cyan {
   background: #00ecff;
 }
-@keyframes pulse-animation {
+@keyframes ripple-animation {
   from {
     transform: scale(0.25);
     opacity: 1;
   }
   to {
-    transform: scale(100);
-    opacity: 0;
-  }
-}
-@keyframes ripple-animation {
-  from {
-    transform: scale(0.25);
-    opacity: 0.6;
-  }
-  to {
-    transform: scale(15);
+    transform: scale(5);
     opacity: 0;
   }
 }
@@ -490,14 +428,12 @@ section.red img {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(140, 146, 172, 0.5);
-  -webkit-mix-blend-mode: color-dodge;
-  mix-blend-mode: color-dodge;
+  background: #8c92ac;
   color: #fff;
   z-index: 9999;
   display: none;
 }
-.wait .wrapper {
+.wait p {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -507,30 +443,4 @@ section.red img {
   transform: translate(-50%, -50%);
   width: 80%;
   text-align: center;
-}
-.button {
-  display: inline-block;
-  background: #fff;
-  padding: 15px 25px;
-  margin: 2em 0;
-  text-decoration: none;
-  color: #1d1d1d;
-  text-transform: uppercase;
-  border: 0;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-}
-.button:active,
-.button:focus {
-  outline: none;
-}
-.button:active {
-  -ms-transform: scale(0.9);
-  -webkit-transform: scale(0.9);
-  -moz-transform: scale(0.9);
-  transform: scale(0.9);
 }
