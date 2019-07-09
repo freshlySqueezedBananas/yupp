@@ -6,6 +6,7 @@
     "express": "^4.10.2",
     "randomstring": "^1.1.5",
     "socket.io": "^1.4.8",
-    "socket.io.users": "^2.0.2"
+    "socket.io.users": "^2.0.2",
+    "underscore": "^1.9.1"
   }
 }
